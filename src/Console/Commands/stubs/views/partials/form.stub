@@ -1,0 +1,7 @@
+<div class="form-group">
+    {!! Form::label('field', 'Field:') !!}
+    {!! Form::text('field', null) !!}
+</div>
+<div class="form-group">
+    {!! Form::submit($submitText, ['class'=>'btn primary']) !!}
+</div>

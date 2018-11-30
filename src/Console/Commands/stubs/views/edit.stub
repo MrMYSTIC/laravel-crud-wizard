@@ -1,0 +1,15 @@
+@extends('layout')
+
+@section('content')
+    <h2>Edit DummyModelClass</h2>
+
+    <ul>
+    @foreach($errors->all() as $error)
+        <li>{{ $error }}</li>
+    @endforeach
+    </ul>
+
+    {!! Form::model($DummyModelVariable, ['route' => ['DummyModelVariables.update', $post->id], 'method' => 'PUT']) !!}
+        @include('DummyModelVariables/partials/form', ['submitText' => 'Update DummyModelClass'])
+    {!! Form::close() !!}
+@endsection

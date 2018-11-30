@@ -1,0 +1,77 @@
+<?php
+
+namespace DummyNamespace;
+
+use DummyFullModelClass;
+use Illuminate\Http\Request;
+use DummyRootNamespaceHttp\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
+use App\Http\Resource\DummyResource;
+
+class DummyClass extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function index()
+    {
+        return DummyResource::collection(DummyModelClass::all());
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return DummyResource
+     */
+    public function store(Request $request)
+    {
+        $DummyModelVariable = new DummyModelClass();
+        $DummyModelVariable->fill($request->request->all());
+        $DummyModelVariable->save();
+
+        return new DummyResource($DummyModelVariable);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \DummyFullModelClass  $DummyModelVariable
+     * @return DummyResource
+     */
+    public function show(DummyModelClass $DummyModelVariable)
+    {
+        return new DummyResource($DummyModelVariable);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \DummyFullModelClass  $DummyModelVariable
+     * @return DummyResource
+     */
+    public function update(Request $request, DummyModelClass $DummyModelVariable)
+    {
+        $DummyModelVariable->fill($request->request->all());
+        $DummyModelVariable->save();
+
+        return new DummyResource($DummyModelVariable);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \DummyFullModelClass  $DummyModelVariable
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function destroy(DummyModelClass $DummyModelVariable)
+    {
+        $DummyModelVariable->delete();
+
+        return new JsonResponse('', 204);
+    }
+}

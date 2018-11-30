@@ -1,0 +1,5 @@
+@extends('layout')
+
+@section('content')
+    Insert your content here
+@stop
