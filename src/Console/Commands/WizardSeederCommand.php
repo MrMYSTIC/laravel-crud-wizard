@@ -100,4 +100,20 @@ class WizardSeederCommand extends WizardBaseCommand
         $name = Str::plural($name);
         return $name . 'TableSeeder';
     }
+
+    /**
+     * Build the model replacement values.
+     *
+     * @param  array  $replace
+     * @return array
+     */
+    protected function buildModelReplacements(array $replace)
+    {
+        $modelClass = $this->parseModel($this->argument('name'));
+
+        return array_merge($replace, [
+            'DummyModel' => $modelClass,
+            'DummyVariable' => lcfirst(class_basename($modelClass)),
+        ]);
+    }
 }

@@ -84,4 +84,42 @@ class WizardModelCommand extends WizardBaseCommand
         }
         return app_path("/{$name}.php");
     }
+
+    /**
+     * Build the model replacement values.
+     *
+     * @param  array  $replace
+     * @return array
+     */
+    protected function buildModelReplacements(array $replace)
+    {
+        $modelClass = $this->parseModel($this->argument('name'));
+
+        return array_merge($replace, [
+            'DummyFullModelClass' => $modelClass,
+            'DummyModelClass' => class_basename($modelClass),
+            'DummyModelVariable' => lcfirst(class_basename($modelClass)),
+            'DummyResource' => class_basename($modelClass) . 'Resource',
+            'DummyClass' => class_basename($modelClass) . 'Controller',
+            'DummyFillableFields' => $this->getFillableFields(),
+        ]);
+    }
+
+    protected function getFillableFields()
+    {
+        $filableFields = [];
+        foreach ($this->fields as $field) {
+            if (!$field['fillable']) {
+                continue;
+            }
+
+            $filableFields[] = "'{$field['name']}'";
+        }
+
+        if (empty($filableFields)) {
+            return "//'*'";
+        }
+
+        return implode(', ', $filableFields);
+    }
 }

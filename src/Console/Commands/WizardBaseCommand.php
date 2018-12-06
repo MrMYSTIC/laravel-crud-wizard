@@ -4,11 +4,33 @@ namespace MrMYSTIC\CrudWizard\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
-use Symfony\Component\Console\Input\InputOption;
 use Illuminate\Filesystem\Filesystem;
 
 abstract class WizardBaseCommand extends GeneratorCommand
 {
+    protected $fields = [];
+
+    /**
+     * Execute the console command.
+     *
+     * @return bool|null
+     */
+    public function handle()
+    {
+        $this->fields = $this->getFields();
+        return parent::handle();
+    }
+
+    protected function getFields()
+    {
+        $name = $this->argument('name');
+        $fileName = storage_path("{$name}_fields.json");
+        if (!file_exists($fileName)) {
+            return [];
+        }
+        return json_decode(file_get_contents(storage_path("{$name}_fields.json")), true);
+    }
+
     /**
      * Create a new command instance.
      *

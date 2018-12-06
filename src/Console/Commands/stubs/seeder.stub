@@ -11,6 +11,9 @@ class DummyClass extends Seeder
      */
     public function run()
     {
-        //
+        factory(DummyModel::class, 10)->create()->each(function ($DummyVariable) {
+            //make some actions with related model(s) if needed
+            //$DummyVariable->some_relation()->save(factory(App\SomeModel::class)->make());
+        });
     }
 }

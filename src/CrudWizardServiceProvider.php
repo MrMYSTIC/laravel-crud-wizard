@@ -4,7 +4,9 @@ namespace MrMYSTIC\CrudWizard;
 
 use MrMYSTIC\CrudWizard\Console\Commands\WizardControllerCommand;
 use MrMYSTIC\CrudWizard\Console\Commands\WizardFactoryCommand;
+use MrMYSTIC\CrudWizard\Console\Commands\WizardMigrationCommand;
 use MrMYSTIC\CrudWizard\Console\Commands\WizardModelCommand;
+use MrMYSTIC\CrudWizard\Console\Commands\WizardRequestCommand;
 use MrMYSTIC\CrudWizard\Console\Commands\WizardResourceCommand;
 use MrMYSTIC\CrudWizard\Console\Commands\WizardSeederCommand;
 use MrMYSTIC\CrudWizard\Console\Commands\WizardViewCommand;
@@ -28,6 +30,8 @@ class CrudWizardServiceProvider extends ServiceProvider {
                 WizardSeederCommand::class,
                 WizardControllerCommand::class,
                 WizardModelCommand::class,
+                WizardRequestCommand::class,
+                WizardMigrationCommand::class,
             ]
         );
 

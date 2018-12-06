@@ -137,7 +137,34 @@ class WizardControllerCommand extends WizardBaseCommand
             'DummyModelVariable' => lcfirst(class_basename($modelClass)),
             'DummyResource' => class_basename($modelClass) . 'Resource',
             'DummyClass' => class_basename($modelClass) . 'Controller',
+            'DummyFullRequestClass' => $this->getRequestFullClass(),
+            'DummyRequest' => $this->getRequestClass(),
         ]);
+    }
+
+    private function getRequestFullClass() {
+        $name = $this->argument('name');
+        $customRequestClass = 'App\\Http\\Requests\\' . $name . 'Request';
+
+        try {
+            class_exists($customRequestClass);
+            return $customRequestClass;
+        } catch (\Exception $e) {
+            return 'Illuminate\\Http\\Request';
+        }
+
+    }
+
+    private function getRequestClass() {
+        $name = $this->argument('name');
+        $customRequestClass = 'App\\Http\\Requests\\' . $name . 'Request';
+
+        try {
+            class_exists($customRequestClass);
+            return $name . 'Request';
+        } catch (\Exception $e) {
+            return 'Request';
+        }
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace DummyNamespace;
 
 use DummyFullModelClass;
-use Illuminate\Http\Request;
+use DummyFullRequestClass;
 use DummyRootNamespaceHttp\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use App\Http\Resource\DummyResource;
@@ -23,10 +23,10 @@ class DummyClass extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \DummyFullRequestClass  $request
      * @return DummyResource
      */
-    public function store(Request $request)
+    public function store(DummyRequest $request)
     {
         $DummyModelVariable = new DummyModelClass();
         $DummyModelVariable->fill($request->request->all());
@@ -49,11 +49,11 @@ class DummyClass extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \DummyFullRequestClass  $request
      * @param  \DummyFullModelClass  $DummyModelVariable
      * @return DummyResource
      */
-    public function update(Request $request, DummyModelClass $DummyModelVariable)
+    public function update(DummyRequest $request, DummyModelClass $DummyModelVariable)
     {
         $DummyModelVariable->fill($request->request->all());
         $DummyModelVariable->save();
